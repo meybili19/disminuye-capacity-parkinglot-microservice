@@ -45,16 +45,16 @@ jobs:
             echo "📥 Descargando nueva imagen..."
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/disminuye_capacity_parkinglot_image:latest
 
-            # Ejecutar el nuevo contenedor con las variables de entorno
+            # Ejecutar el nuevo contenedor con los valores especificados
             echo "🚀 Ejecutando nuevo contenedor..."
-            sudo docker run -d --name disminuye_capacity_parkinglot_container \
-              -e PORT=${{ secrets.PORT }} \
-              -e DB_HOST=${{ secrets.DB_HOST_M }} \
-              -e DB_USER=${{ secrets.DB_USER_M }} \
-              -e DB_PASSWORD=${{ secrets.DB_PASSWORD_M }} \
-              -e DB_NAME=${{ secrets.DB_NAME_M }} \
-              -e PARKINGLOT_SERVICE_URL=${{ secrets.PARKINGLOT_SERVICE_URL_M }} \
-              -e PARKINGLOT_SERVICE_CAPACITY_URL=${{ secrets.PARKINGLOT_SERVICE_CAPACITY_URL_M }} \
+            sudo docker run -d -p 7007:7007 --name disminuye_capacity_parkinglot_container \
+              -e PORT=7007 \
+              -e DB_HOST=54.225.222.50 \
+              -e DB_USER=root \
+              -e DB_PASSWORD=admin1234 \
+              -e DB_NAME=ParkingLotDB \
+              -e PARKINGLOT_SERVICE_URL=http://34.196.247.137:7003/parkinglots \
+              -e PARKINGLOT_SERVICE_CAPACITY_URL=http://98.84.148.242:7004/parkinglot/capacity \
               ${{ secrets.DOCKER_USERNAME }}/disminuye_capacity_parkinglot_image:latest
 
             echo "✅ Despliegue completado con éxito."
