@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.use(capacityRoutes);
 
-const PORT = process.env.PORT || 6006;
+const PORT = process.env.PORT || 7007;
 app.listen(PORT, () => {
     console.log(`Decrease Capacity Microservice running on port ${PORT}`);
 });
